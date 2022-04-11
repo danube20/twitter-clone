@@ -1,0 +1,14 @@
+footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
+}
+
+footer p {
+    font-size: 0.8em;
+    margin: 5px 6px;
+    letter-spacing: -0.8px;
+    color: rgb(83 100 113);
+}

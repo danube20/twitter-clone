@@ -10,7 +10,7 @@ router.post('/register', (req, res) => {
 
     const { email, password, name, city, postalCode } = req.body
 
-    if (email === '' || password === '' || name === '' || city === '' || postalCode === '') {
+    if (email === '' || password === '' || name === '' || city === '' || postalCode === 0) {
         res.status(400).json({ message: 'El email, contraseña, nombre, ciudad y código postal son requeridos.' })
         return
     }
@@ -39,7 +39,7 @@ router.post('/register', (req, res) => {
         .catch(err => res.status(500).json(err))
 })
 
-router.post('login', (req, res) => {
+router.post('/login', (req, res) => {
     const { email, password } = req.body
 
     if (email === '' || password === '') {
@@ -56,8 +56,8 @@ router.post('login', (req, res) => {
             }
 
             if (bcrypt.compareSync(password, foundUser.password)) {
-                const { email, name, password, city, postalCode } = foundUser
-                const payload = { email, name, city, postalCode, _id }
+                const { email, name, password, city, postalCode, _id } = foundUser
+                const payload = { email, name, password, city, postalCode, _id }
                 const authToken = jwt.sign(
                     payload,
                     process.env.TOKEN_SECRET,
