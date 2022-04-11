@@ -11,4 +11,9 @@ footer p {
     margin: 5px 6px;
     letter-spacing: -0.8px;
     color: rgb(83 100 113);
+    cursor: pointer;
+}
+
+.footerNone {
+    display: none;
 }

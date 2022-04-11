@@ -1,8 +1,14 @@
+import { useLocation } from 'react-router-dom'
 import './Footer.css'
 
 const Footer = () => {
+
+    const location = useLocation()
+    const notShow = location.pathname.includes('signup') || location.pathname.includes('signin')
+    const newClass = !notShow ? 'container' : 'footerNone'
+
     return (
-        <footer className='container'>
+        <footer className={newClass}>
             <p>About</p>
             <p>Help Center</p>
             <p>Terms of Service</p>

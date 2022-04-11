@@ -1,0 +1,14 @@
+.signupTop {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1rem 0;
+}
+
+.signupTop i:nth-child(1) {
+    font-size: 1.2rem;
+}
+.signupTop i:nth-child(2) {
+    font-size: 1.8rem;
+    color: var(--main-color);
+}
