@@ -8,12 +8,12 @@ const saltRounds = 10
 
 router.post('/register', (req, res) => {
 
-    const { email, password, name, city, postalCode } = req.body
+    const { email, password, number, name, city, postalCode, day, month, year } = req.body
 
-    if (email === '' || password === '' || name === '' || city === '' || postalCode === 0) {
-        res.status(400).json({ message: 'El email, contraseña, nombre, ciudad y código postal son requeridos.' })
-        return
-    }
+    // if (email === '' || password === '' || name === '' || city === '' || postalCode === 0) {
+    //     res.status(400).json({ message: 'El email, contraseña, nombre, ciudad y código postal son requeridos.' })
+    //     return
+    // }
 
     if (password.length < 2) {
         res.status(400).json({ message: 'La contraseña debe tener al menos 2 caracteres.' })
@@ -29,14 +29,17 @@ router.post('/register', (req, res) => {
             }
             const salt = bcrypt.genSaltSync(saltRounds)
             const hashedPassword = bcrypt.hashSync(password, salt)
-            return User.create({ email, password: hashedPassword, name, city, postalCode })
+            return User.create({ email, password: hashedPassword, number, name, city, postalCode, birthday: `${day}/${month}/${year}` })
         })
         .then(createdUser => {
-            const { email, name, password, city, postalCode, _id } = createdUser
-            const user = { email, name, password, city, postalCode, _id }
+            const { email, name, password, number, city, postalCode, birthday, _id } = createdUser
+            const user = { email, name, password, number, city, postalCode, birthday, _id }
             res.status(201).json({ user })
         })
-        .catch(err => res.status(500).json(err))
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err)
+        })
 })
 
 router.post('/login', (req, res) => {
